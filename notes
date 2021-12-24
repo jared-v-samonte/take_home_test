@@ -1,0 +1,24 @@
+Editor:
+* Visual Studio Code
+
+Build:
+* WSL 2 (Windows Subsystem Linux) 
+* Ubuntu 20.04 Linux
+* cmake
+
+Display:
+* Xming
+* Xlaunch 
+* VcXsrv
+sudo apt install x11-apps
+sudo apt install x11-xserver-utils
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export LIBGL_ALWAYS_INDIRECT=0
+
+Set-Up:
+sudo apt-get update && sudo apt-get install build-essential
+sudo apt install cmake
+sudo apt install g++
+mkdir build && cd build
+cmake ..
+make

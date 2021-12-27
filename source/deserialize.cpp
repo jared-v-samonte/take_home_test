@@ -10,15 +10,20 @@
 // RapidJSON
 #include "document.h"
 #include "rapidjson.h"
+#include "linesegment.h"
+#include <iostream>
 
 using namespace rapidjson;
+
 
 // Input data format/parsing.
 // Input is a JSON file. The root object is an array called "lines". These are line segments.
 // Each line segment has an id "id" (string), starting point "start and an end point "end".
 // Points are represented as an array of two doubles. These correspond to X and Y cartesian coordinates.
 
-void deserialize(Document& doc) {
+void deserialize(Document& doc) 
+{
+    linesegment temp;
     auto const& lines_json = doc["lines"];
     if (lines_json.IsArray()){
         auto lines_array = lines_json.GetArray();
@@ -31,12 +36,17 @@ void deserialize(Document& doc) {
                     start_y = start_json.GetArray()[1].GetDouble(),
                     end_x = end_json.GetArray()[0].GetDouble(),
                     end_y = end_json.GetArray()[1].GetDouble();
-
+                temp.setStartX(start_x);
+                temp.setStartY(start_y);
+                temp.setEndX(start_y);
+                temp.setEndY(end_y);
+                temp.print();
                 auto id = id_json.GetString();
             }
         }
     }
 }
+
 
 void deserialize_from_string(std::string const &json_data){
     Document doc;

@@ -10,7 +10,7 @@
 // STL
 #include <string>
 
-void jsonToString(const char * file);
+std::string jsonToString(const char * file);
 
 
 #endif //TAKE_HOME_TEST_FROMJSON_H

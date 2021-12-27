@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/users/JAVSamonte/Documents/GitHub/take_home_test
+CMAKE_SOURCE_DIR = /mnt/c/Users/JAVSamonte/Documents/Github/take_home_test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/users/JAVSamonte/Documents/GitHub/take_home_test/build
+CMAKE_BINARY_DIR = /mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -91,9 +91,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/JAVSamonte/Documents/GitHub/take_home_test/build/CMakeFiles /mnt/c/users/JAVSamonte/Documents/GitHub/take_home_test/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/build/CMakeFiles /mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/users/JAVSamonte/Documents/GitHub/take_home_test/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -214,6 +214,33 @@ source/fromjson.cpp.s:
 	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/fromjson.cpp.s
 .PHONY : source/fromjson.cpp.s
 
+source/linesegment.o: source/linesegment.cpp.o
+
+.PHONY : source/linesegment.o
+
+# target to build an object file
+source/linesegment.cpp.o:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/linesegment.cpp.o
+.PHONY : source/linesegment.cpp.o
+
+source/linesegment.i: source/linesegment.cpp.i
+
+.PHONY : source/linesegment.i
+
+# target to preprocess a source file
+source/linesegment.cpp.i:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/linesegment.cpp.i
+.PHONY : source/linesegment.cpp.i
+
+source/linesegment.s: source/linesegment.cpp.s
+
+.PHONY : source/linesegment.s
+
+# target to generate assembly for a file
+source/linesegment.cpp.s:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/linesegment.cpp.s
+.PHONY : source/linesegment.cpp.s
+
 source/main.o: source/main.cpp.o
 
 .PHONY : source/main.o
@@ -240,6 +267,33 @@ source/main.s: source/main.cpp.s
 source/main.cpp.s:
 	$(MAKE) -f CMakeFiles/take_home_test.dir/build.make CMakeFiles/take_home_test.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
+
+source/math.o: source/math.cpp.o
+
+.PHONY : source/math.o
+
+# target to build an object file
+source/math.cpp.o:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/math.cpp.o
+.PHONY : source/math.cpp.o
+
+source/math.i: source/math.cpp.i
+
+.PHONY : source/math.i
+
+# target to preprocess a source file
+source/math.cpp.i:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/math.cpp.i
+.PHONY : source/math.cpp.i
+
+source/math.s: source/math.cpp.s
+
+.PHONY : source/math.s
+
+# target to generate assembly for a file
+source/math.cpp.s:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/math.cpp.s
+.PHONY : source/math.cpp.s
 
 test/tests.o: test/tests.cpp.o
 
@@ -286,9 +340,15 @@ help:
 	@echo "... source/fromjson.o"
 	@echo "... source/fromjson.i"
 	@echo "... source/fromjson.s"
+	@echo "... source/linesegment.o"
+	@echo "... source/linesegment.i"
+	@echo "... source/linesegment.s"
 	@echo "... source/main.o"
 	@echo "... source/main.i"
 	@echo "... source/main.s"
+	@echo "... source/math.o"
+	@echo "... source/math.i"
+	@echo "... source/math.s"
 	@echo "... test/tests.o"
 	@echo "... test/tests.i"
 	@echo "... test/tests.s"

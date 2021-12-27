@@ -14,22 +14,26 @@
 
 using namespace rapidjson;
 
-void jsonToString(const char* filename)
+std::string jsonToString(const char* filename)
 {
   char readBuffer[80000];
 
-  FILE* filepointer = fopen("../test/assets/1-reference.json", "r");
+  //opens stream and reads file with buffer
+  FILE* filepointer = fopen(filename, "r");
   FileReadStream is(filepointer, readBuffer, sizeof(readBuffer));
 
+  // uses rapidjson and the close stream
   Document jsonDocument;
   jsonDocument.ParseStream(is);
   fclose(filepointer);
 
+  // uses rapid json again writes from json to string
   StringBuffer buffer;
   Writer<StringBuffer> writer(buffer);
   jsonDocument.Accept(writer);
   std::string jsonString(buffer.GetString(), buffer.GetSize());
-  std::cout << jsonString << std::endl;
-  return ;
+
+  //return solution 
+  return jsonString;
 }
 

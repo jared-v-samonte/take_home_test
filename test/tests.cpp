@@ -8,6 +8,7 @@
 
 #include "deserialize.h"
 #include "fromjson.h"
+#include "linesegment.h"
 
 // stub to test the framework. Replace/modify as needed.
 TEST_CASE("stub_1","[deserialize_lines]"){
@@ -18,8 +19,13 @@ TEST_CASE("stub_1","[deserialize_lines]"){
 
 
 TEST_CASE("stub_2","[readfile]"){
-    const char *filename = NULL;
-    filename = "./assets/1-reference.json";
+    const char *filename = "../test/assets/1-reference.json";
     jsonToString(filename);
+    REQUIRE(true);
+}
+
+TEST_CASE("stub_3","[deserialize_lines + readfile]"){
+    const char *filename = "../test/assets/1-split.json";
+    deserialize_from_string(jsonToString(filename));
     REQUIRE(true);
 }

@@ -5,55 +5,71 @@
 //
 
 #include <iostream>
+#include "math.h"
+#include "linesegment.h"
+#include "deserialize.h"
 
 
-double getSlope(double point1, double point2);
-double getYIntercept(double point1, double point2);
-bool sameSlope(double slope1, double slope2);
-bool sameYIntercept(double intecept1, double intecpet2);
-bool bothTestPass(bool test1, bool test2);
 
-
-double getSlope(double point1, double point2)
+float getSlope(Linesegment line)
 {
-    double solution;
-    solution = 0.0;
+    float x_difference = line.getStartPoint().point_x - line.getEndPoint().point_x;
+    float  y_difference = line.getStartPoint().point_y - line.getEndPoint().point_y;
+    float solution = y_difference/x_difference;
     return solution;
 }
 
-double getYIntercept(double point1, double point2)
+bool hasSameSlope(Linesegment line_1, Linesegment line_2)
 {
-    double solution;
-    solution = 0.0;
-    return solution;
+    return (getSlope(line_1) && getSlope(line_2));
 }
 
-bool sameSlope(double slope1, double slope2)
+bool isOnSegment(Linesegment line, double point)
 {
-    bool solution;
-    solution = 0.0;
-    return solution;
-}
-
-bool sameYIntercept(double slope1, double slope2)
-{
-    bool solution;
-    solution = 0.0;
-    return solution;
-}
-
-bool bothTestPass()
-{
-    /*
     bool solution = true;
-    if(sameSlope())
+    if (point <= std::max(line.getStartPoint().point_x, line.getEndPoint().point_x))
     {
         solution = false;
     }
-    else if(sameYIntercept())
+    if (point >= std::min(line.getStartPoint().point_x, line.getEndPoint().point_x))
+    {
+        solution = false;
+    }
+    if (point <= std::max(line.getStartPoint().point_y, line.getEndPoint().point_y))
+    {
+        solution = false;
+    }
+    if (point >= std::min(line.getStartPoint().point_y, line.getEndPoint().point_y))
     {
         solution = false;
     }
     return solution;
-    */
+}
+
+bool isIntercepting(Linesegment line_1, Linesegment line_2)
+{
+    bool solution = true;
+    if (isOnSegment(line_1, line_2.getStartPoint().point_x))
+    {
+        solution = false;
+    }
+    if (isOnSegment(line_1, line_2.getStartPoint().point_y))
+    {
+        solution = false;
+    }
+    if (isOnSegment(line_1, line_2.getEndPoint().point_x))
+    {
+        solution = false;
+    }
+    if (isOnSegment(line_1, line_2.getEndPoint().point_y))
+    {
+        solution = false;
+    }
+    return solution;
+}
+
+
+bool isMerging(Linesegment line_1, Linesegment line_2)
+{
+    return (hasSameSlope(line_1, line_2), isIntercepting(line_1, line_2));
 }

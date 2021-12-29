@@ -6,10 +6,11 @@
 
 #ifndef TAKE_HOME_TEST_MATH_H
 #define TAKE_HOME_TEST_MATH_H
+#include "linesegment.h"
 
-// STL
+bool isMerging(bool test1, bool test2);
+bool isSegmentSame(Linesegment line_1, Linesegment line_2);
 
-//std::string jsonToString(const char * file);
 
 
 #endif //TAKE_HOME_TEST_MATH_H

@@ -22,3 +22,5 @@ sudo apt install g++
 mkdir build && cd build
 cmake ..
 make
+
+ ‘std::forward_list<Linesegment>::insert_after(rapidjson::GenericArray<true, rapidjson::GenericValue<rapidjson::UTF8<> > >&, Linesegment&)’

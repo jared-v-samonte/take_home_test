@@ -7,7 +7,9 @@
 #ifndef TAKE_HOME_TEST_LINESEGMENT_H
 #define TAKE_HOME_TEST_LINESEGMENT_H
 
-class linesegment
+#include <forward_list>
+
+class Linesegment
 {
     // Access specifier
     public:
@@ -22,9 +24,11 @@ class linesegment
     void setEndY(double end_y);
     point getStartPoint();
     point getEndPoint();
+    Linesegment();
+    Linesegment(double start_x, double start_y, double end_x, double end_y);
+    bool isSegmentSame(Linesegment segment);
     void print();
-    linesegment();
-    linesegment(double start_x, double start_y, double end_x, double end_y);
+
 
     private:
     point start_point;

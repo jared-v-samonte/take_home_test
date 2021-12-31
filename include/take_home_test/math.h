@@ -8,9 +8,9 @@
 #define TAKE_HOME_TEST_MATH_H
 #include "linesegment.h"
 #include <forward_list>
+#include <iostream>
+#include "deserialize.h"
 
 void compareEveryLine(std::forward_list<Linesegment> list);
-
-
 
 #endif //TAKE_HOME_TEST_MATH_H

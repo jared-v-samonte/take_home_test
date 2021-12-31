@@ -12,8 +12,7 @@
 #include <forward_list>
 #include "linesegment.h"
 
-void deserialize_from_string(std::string const& json_data);
-std::forward_list<Linesegment> getLineList();
+std::forward_list<Linesegment> deserialize_from_string(std::string const& json_data);
 
 #endif //TAKE_HOME_TEST_DESERIALIZE_H
 

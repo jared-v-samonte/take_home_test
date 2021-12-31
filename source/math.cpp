@@ -22,49 +22,55 @@ float getSlope(Linesegment line)
 
 bool hasSameSlope(Linesegment line_1, Linesegment line_2)
 {
-    return (getSlope(line_1) && getSlope(line_2));
+    return (getSlope(line_1) == getSlope(line_2));
 }
 
-bool isOnSegment(Linesegment line, double point)
+bool isOnSegment(Linesegment line, Linesegment::point point)
 {
-    bool solution = true;
-    if (point <= std::max(line.getStartPoint().point_x, line.getEndPoint().point_x))
+    bool solution = false;
+    if(point.point_x <= line.getStartPoint().point_x)
     {
-        solution = false;
+        solution = true;     
     }
-    if (point >= std::min(line.getStartPoint().point_x, line.getEndPoint().point_x))
+    if(point.point_x >= line.getStartPoint().point_x)
     {
-        solution = false;
+        solution = true;
     }
-    if (point <= std::max(line.getStartPoint().point_y, line.getEndPoint().point_y))
+    if(point.point_y <= line.getStartPoint().point_y)
     {
-        solution = false;
+        solution = true;
     }
-    if (point >= std::min(line.getStartPoint().point_y, line.getEndPoint().point_y))
+    if(point.point_y >= line.getStartPoint().point_y)
     {
-        solution = false;
+        solution = true;
     }
     return solution;
 }
 
+/*
+def within(p, q, r):
+    "Return true iff q is between p and r (inclusive)."
+    return p <= q <= r or r <= q <= p
+*/
+
 bool isIntercepting(Linesegment line_1, Linesegment line_2)
 {
-    bool solution = true;
-    if (!isOnSegment(line_1, line_2.getStartPoint().point_x))
+    bool solution = false;
+    if (isOnSegment(line_1, line_2.getStartPoint()))
     {
-        solution = false;
+        solution = true;
     }
-    if (!isOnSegment(line_1, line_2.getStartPoint().point_y))
+    if (isOnSegment(line_1, line_2.getStartPoint()))
     {
-        solution = false;
+        solution = true;
     }
-    if (!isOnSegment(line_1, line_2.getEndPoint().point_x))
+    if (isOnSegment(line_1, line_2.getEndPoint()))
     {
-        solution = false;
+        solution = true;
     }
-    if (!isOnSegment(line_1, line_2.getEndPoint().point_y))
+    if (isOnSegment(line_1, line_2.getEndPoint()))
     {
-        solution = false;
+        solution = true;
     }
     return solution;
 }
@@ -72,22 +78,22 @@ bool isIntercepting(Linesegment line_1, Linesegment line_2)
 
 bool isMerging(Linesegment line_1, Linesegment line_2)
 {
-    return (hasSameSlope(line_1, line_2), isIntercepting(line_1, line_2));
+    return (hasSameSlope(line_1, line_2) && isIntercepting(line_1, line_2));
 }
 
 void printMergingLines(Linesegment line_1, Linesegment line_2)
 {
-    std::cout << "--------The following lines merge---------"<< std::endl;
+    std::cout << std::endl <<"--------The following lines merge---------"<< std::endl;
     line_1.print();
     line_2.print();
-    std::cout << "------------------------------------------" << std::endl << std::endl;
+    std::cout << "------------------------------------------" << std::endl;
 }
 void printNotMergingLines(Linesegment line_1, Linesegment line_2)
 {
-    std::cout << "--------The following do NOT merge---------"<< std::endl;
+    std::cout << std::endl << std::endl <<"--------The following do NOT merge---------"<< std::endl;
     line_1.print();
     line_2.print();
-    std::cout << "------------------------------------------" << std::endl << std::endl;
+    std::cout << "------------------------------------------" << std::endl;
 }
 
 void printMergingResults(Linesegment line_1, Linesegment line_2)
@@ -105,6 +111,7 @@ void printMergingResults(Linesegment line_1, Linesegment line_2)
 
 void compareEveryLine(std::forward_list<Linesegment> list)
 {
+    std::cout << std::endl;
     std::forward_list<Linesegment>::iterator iterator_erase = list.before_begin();
     for (std::forward_list<Linesegment>::iterator iterator_i = list.begin(); iterator_i != list.end(); ++iterator_i)
     {
@@ -112,7 +119,8 @@ void compareEveryLine(std::forward_list<Linesegment> list)
         {
             printMergingResults(*iterator_i, *iterator_j);
         }
-        list.erase_after(iterator_erase);
-        iterator_erase = iterator_i;
+        //list.erase_after(iterator_erase);
+        //iterator_erase = iterator_i;
     }
+    std::cout << std::endl;
 }

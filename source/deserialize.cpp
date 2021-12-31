@@ -22,11 +22,10 @@ using namespace rapidjson;
 // Each line segment has an id "id" (string), starting point "start and an end point "end".
 // Points are represented as an array of two doubles. These correspond to X and Y cartesian coordinates.
 
-std::forward_list<Linesegment> line_list;
 
-void deserialize(Document& doc) 
+std::forward_list<Linesegment> deserialize(Document& doc) 
 {
-    //std::forward_list<Linesegment> line_list;
+    std::forward_list<Linesegment> line_list;
     std::forward_list<Linesegment>::iterator line_iterator = line_list.before_begin();
     auto const& lines_json = doc["lines"];
     if (lines_json.IsArray()){
@@ -46,20 +45,16 @@ void deserialize(Document& doc)
                 new_segment.setEndX(end_x);
                 new_segment.setEndY(end_y);
                 auto id = id_json.GetString();
-                new_segment.print();
                 line_iterator = line_list.insert_after(line_iterator, new_segment);
             }
         }
     }
-}
-
-std::forward_list<Linesegment> getLineList()
-{
     return line_list;
 }
 
-void deserialize_from_string(std::string const &json_data){
+std::forward_list<Linesegment> deserialize_from_string(std::string const &json_data)
+{
     Document doc;
     doc.Parse(json_data.c_str());
-    deserialize(doc);
+    return deserialize(doc);
 }

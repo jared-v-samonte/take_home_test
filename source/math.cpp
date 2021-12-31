@@ -25,26 +25,39 @@ bool hasSameSlope(Linesegment line_1, Linesegment line_2)
     return (getSlope(line_1) == getSlope(line_2));
 }
 
-bool isOnSegment(Linesegment line, Linesegment::point point)
+bool isStartMidEnd(double start, double mid, double end)
 {
     bool solution = false;
-    if(point.point_x <= line.getStartPoint().point_x)
+    // start is lower than end
+    if((mid >= start) && (mid <= end))
     {
         solution = true;     
     }
-    if(point.point_x >= line.getStartPoint().point_x)
+    // if end is lower than start
+    else if((mid >= end) && (mid <= start))
     {
-        solution = true;
-    }
-    if(point.point_y <= line.getStartPoint().point_y)
-    {
-        solution = true;
-    }
-    if(point.point_y >= line.getStartPoint().point_y)
-    {
-        solution = true;
+        solution = true;     
     }
     return solution;
+}
+
+
+bool isOnSegment(Linesegment line, Linesegment::point point)
+{
+    bool solution = true;
+    //checks if the X value is between the start and end point's X values
+    if(!isStartMidEnd(line.getStartPoint().point_x, point.point_x, line.getEndPoint().point_x)) 
+    {
+        solution = false;
+    }
+    
+    //checks if the Y value is between the start and end point's Y values
+    if (!isStartMidEnd(line.getStartPoint().point_y, point.point_y, line.getEndPoint().point_y))
+    {
+        solution = false;     
+    }    
+
+    return (solution);
 }
 
 /*
@@ -104,7 +117,7 @@ void printMergingResults(Linesegment line_1, Linesegment line_2)
     }
     else
     {
-        printNotMergingLines(line_1, line_2);
+        //printNotMergingLines(line_1, line_2);
     }
 }
 

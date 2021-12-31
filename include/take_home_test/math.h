@@ -7,9 +7,9 @@
 #ifndef TAKE_HOME_TEST_MATH_H
 #define TAKE_HOME_TEST_MATH_H
 #include "linesegment.h"
+#include <forward_list>
 
-bool isMerging(bool test1, bool test2);
-bool isSegmentSame(Linesegment line_1, Linesegment line_2);
+void compareEveryLine(std::forward_list<Linesegment> list);
 
 
 

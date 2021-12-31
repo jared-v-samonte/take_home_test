@@ -9,7 +9,11 @@
 
 // STL
 #include <string>
+#include <forward_list>
+#include "linesegment.h"
 
 void deserialize_from_string(std::string const& json_data);
+std::forward_list<Linesegment> getLineList();
 
 #endif //TAKE_HOME_TEST_DESERIALIZE_H
+

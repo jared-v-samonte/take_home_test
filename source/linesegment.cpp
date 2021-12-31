@@ -59,10 +59,5 @@ bool Linesegment::isSegmentSame(Linesegment segment)
 // Print Function
 void Linesegment::print()
 {
-    std::cout << "Start of String" << std::endl;
-    std::cout <<  "Start Point X Coordiante " << getStartPoint().point_x << std::endl;
-    std::cout <<  "Start Point X Coordiante " << getStartPoint().point_y << std::endl;
-    std::cout <<  "End Point X Coordiante " << getEndPoint().point_x << std::endl;
-    std::cout <<  "End Point Y Coordiante " << getEndPoint().point_y << std::endl;
-    std::cout << "End of String" << std::endl;
+    std::cout <<  "Line Segment: (" << getStartPoint().point_x << "," << getStartPoint().point_y << ") (" << getEndPoint().point_x << "," << getEndPoint().point_y << ")" << std::endl;
 }

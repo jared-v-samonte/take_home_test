@@ -53,18 +53,9 @@ void deserialize(Document& doc)
     }
 }
 
-std::forward_list<Linesegment> getLineArray()
+std::forward_list<Linesegment> getLineList()
 {
     return line_list;
-}
-
-void print_lines()
-{
-    for (std::forward_list<Linesegment>::iterator line_iterator = line_list.begin(); line_iterator != line_list.end(); ++line_iterator)
-    {
-        Linesegment temp = *line_iterator;
-        temp.print();
-    }
 }
 
 void deserialize_from_string(std::string const &json_data){

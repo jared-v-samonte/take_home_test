@@ -3116,7 +3116,7 @@ namespace Detail {
             return *this;
         }
 
-        std::string toString() const;
+        std::string fromFile() const;
 
     private:
         double m_epsilon;
@@ -3192,7 +3192,7 @@ namespace Matchers {
             MatcherUntypedBase() = default;
             MatcherUntypedBase ( MatcherUntypedBase const& ) = default;
             MatcherUntypedBase& operator = ( MatcherUntypedBase const& ) = delete;
-            std::string toString() const;
+            std::string fromFile() const;
 
         protected:
             virtual ~MatcherUntypedBase();
@@ -3250,7 +3250,7 @@ namespace Matchers {
                         first = false;
                     else
                         description += " and ";
-                    description += matcher->toString();
+                    description += matcher->fromFile();
                 }
                 description += " )";
                 return description;
@@ -3283,7 +3283,7 @@ namespace Matchers {
                         first = false;
                     else
                         description += " or ";
-                    description += matcher->toString();
+                    description += matcher->fromFile();
                 }
                 description += " )";
                 return description;
@@ -3307,7 +3307,7 @@ namespace Matchers {
             }
 
             std::string describe() const override {
-                return "not " + m_underlyingMatcher.toString();
+                return "not " + m_underlyingMatcher.fromFile();
             }
             MatcherBase<ArgT> const& m_underlyingMatcher;
         };
@@ -3682,7 +3682,7 @@ namespace Catch {
         {}
 
         void streamReconstructedExpression( std::ostream &os ) const override {
-            auto matcherAsString = m_matcher.toString();
+            auto matcherAsString = m_matcher.fromFile();
             os << Catch::Detail::stringify( m_arg ) << ' ';
             if( matcherAsString == Detail::unprintableString )
                 os << m_matcherString;
@@ -7574,7 +7574,7 @@ namespace Detail {
         return temp;
     }
 
-    std::string Approx::toString() const {
+    std::string Approx::fromFile() const {
         ReusableStringStream rss;
         rss << "Approx( " << ::Catch::Detail::stringify( m_value ) << " )";
         return rss.str();
@@ -7612,7 +7612,7 @@ namespace literals {
 } // end namespace literals
 
 std::string StringMaker<Catch::Detail::Approx>::convert(Catch::Detail::Approx const& value) {
-    return value.toString();
+    return value.fromFile();
 }
 
 } // end namespace Catch
@@ -8333,7 +8333,7 @@ public:
 
 	auto operator + (Column const& other)->Columns;
 
-	auto toString() const -> std::string {
+	auto fromFile() const -> std::string {
 		std::ostringstream oss;
 		oss << *this;
 		return oss.str();
@@ -8451,7 +8451,7 @@ public:
 		return os;
 	}
 
-	auto toString() const -> std::string {
+	auto fromFile() const -> std::string {
 		std::ostringstream oss;
 		oss << *this;
 		return oss.str();
@@ -10982,7 +10982,7 @@ namespace Catch {
 namespace Matchers {
     namespace Impl {
 
-        std::string MatcherUntypedBase::toString() const {
+        std::string MatcherUntypedBase::fromFile() const {
             if( m_cachedToString.empty() )
                 m_cachedToString = describe();
             return m_cachedToString;

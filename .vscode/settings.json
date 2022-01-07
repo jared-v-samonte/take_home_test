@@ -79,6 +79,8 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "coroutine": "cpp",
-        "resumable": "cpp"
+        "resumable": "cpp",
+        "filesystem": "cpp",
+        "codecvt": "cpp"
     }
 }

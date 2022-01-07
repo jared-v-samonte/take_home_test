@@ -29,12 +29,12 @@ bool isStartMidEnd(double start, double mid, double end)
 {
     bool solution = false;
     // start is lower than end
-    if((mid >= start) && (mid <= end))
+    if((start <= mid) && (mid <= end))
     {
         solution = true;     
     }
     // if end is lower than start
-    else if((mid >= end) && (mid <= start))
+    else if((end <= mid) && (mid <= start))
     {
         solution = true;     
     }
@@ -44,19 +44,14 @@ bool isStartMidEnd(double start, double mid, double end)
 
 bool isOnSegment(Linesegment line, Linesegment::point point)
 {
-    bool solution = true;
+    bool solution = false;
     //checks if the X value is between the start and end point's X values
-    if(!isStartMidEnd(line.getStartPoint().point_x, point.point_x, line.getEndPoint().point_x)) 
-    {
-        solution = false;
-    }
-    
+    if((isStartMidEnd(line.getStartPoint().point_x, point.point_x, line.getEndPoint().point_x)) 
     //checks if the Y value is between the start and end point's Y values
-    if (!isStartMidEnd(line.getStartPoint().point_y, point.point_y, line.getEndPoint().point_y))
+    && (isStartMidEnd(line.getStartPoint().point_y, point.point_y, line.getEndPoint().point_y)))
     {
-        solution = false;     
+        solution = true;
     }    
-
     return (solution);
 }
 
@@ -73,15 +68,15 @@ bool isIntercepting(Linesegment line_1, Linesegment line_2)
     {
         solution = true;
     }
-    if (isOnSegment(line_1, line_2.getStartPoint()))
-    {
-        solution = true;
-    }
     if (isOnSegment(line_1, line_2.getEndPoint()))
     {
         solution = true;
     }
-    if (isOnSegment(line_1, line_2.getEndPoint()))
+    if (isOnSegment(line_2, line_1.getStartPoint()))
+    {
+        solution = true;
+    }
+    if (isOnSegment(line_2, line_1.getEndPoint()))
     {
         solution = true;
     }
@@ -96,28 +91,18 @@ bool isMerging(Linesegment line_1, Linesegment line_2)
 
 void printMergingLines(Linesegment line_1, Linesegment line_2)
 {
-    std::cout << std::endl <<"--------The following lines merge---------"<< std::endl;
-    line_1.print();
-    line_2.print();
-    std::cout << "------------------------------------------" << std::endl;
-}
-void printNotMergingLines(Linesegment line_1, Linesegment line_2)
-{
-    std::cout << std::endl << std::endl <<"--------The following do NOT merge---------"<< std::endl;
-    line_1.print();
-    line_2.print();
-    std::cout << "------------------------------------------" << std::endl;
-}
-
-void printMergingResults(Linesegment line_1, Linesegment line_2)
-{
-    if(isMerging(line_1, line_2))
+    if(line_1.isSegmentSame(line_2))
     {
-        printMergingLines(line_1, line_2);
+        std::cout << std::endl <<"--------The lines are identical---------"<< std::endl;
+        line_1.print();
+        std::cout << std::endl;
     }
     else
     {
-        //printNotMergingLines(line_1, line_2);
+        std::cout << std::endl <<"--------The following lines merge---------"<< std::endl;
+        line_1.print();
+        line_2.print();
+        std::cout << "------------------------------------------" << std::endl;
     }
 }
 
@@ -130,7 +115,10 @@ void compareEveryLine(std::forward_list<Linesegment> list)
     {
         for (std::forward_list<Linesegment>::iterator iterator_j = list.begin(); iterator_j != list.end(); ++iterator_j)
         {
-            printMergingResults(*iterator_i, *iterator_j);
+            if(isMerging(*iterator_i, *iterator_j))
+            {
+                printMergingLines(*iterator_i, *iterator_j);;
+            }
         }
         //list.erase_after(iterator_erase);
         //iterator_erase = iterator_i;

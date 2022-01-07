@@ -1,14 +1,12 @@
 #include <iostream>
-#include "fromjson.h"
+#include "fromFile.h"
 #include "linesegment.h"
 #include "math.h"
 #include "deserialize.h"
 #include <forward_list>
 
-int main() 
+int main(int argc, char * argv[])
 {
-    std::cout << "main" << std::endl;
-    const char *filename = "../test/assets/1-reference.json";
-    compareEveryLine(deserialize_from_string(jsonToString(filename)));
-    return 0;
+    std::cout << argv[0]; 
+    std::cin.get();
 }

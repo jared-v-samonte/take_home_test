@@ -23,4 +23,12 @@ mkdir build && cd build
 cmake ..
 make
 
- ‘std::forward_list<Linesegment>::insert_after(rapidjson::GenericArray<true, rapidjson::GenericValue<rapidjson::UTF8<> > >&, Linesegment&)’
+
+export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
+sudo ln -s libboost_python38.so libboost_python.so
+
+
+lboost_python3.dylib -> lboost_python38.dylib
+libboost_python.so -> libboost_python38.so
+libboost_python3.dylib -> libboost_python38.dylib
+libboost_python3.so -> libboost_python-py38.so

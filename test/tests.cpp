@@ -5,12 +5,17 @@
 #define CATCH_CONFIG_MAIN
 
 #include <catch2/catch.hpp>
+#include <fcntl.h>
 
-#include "fromjson.h"
+#include "fromFile.h"
 #include "linesegment.h"
 #include "math.h"
 #include "deserialize.h"
 #include <forward_list>
+#include <stdio.h>
+#include <curses.h>
+#include <Python.h>
+
 
 
 // stub to test the framework. Replace/modify as needed.
@@ -25,28 +30,44 @@ TEST_CASE("stub_1","[deserialize_lines]"){
 TEST_CASE("stub_2","[readfile]"){
     std::cout << "stub_2" << std::endl;
     const char *filename = "../test/assets/1-split.json";
-    std::cout << jsonToString(filename);
+    std::cout << stringFromJSON(filename);
     REQUIRE(true);
 }
 
 TEST_CASE("stub_3","[deserialize_lines + readfile]"){
     std::cout << "stub_3" << std::endl;
     const char *filename = "../test/assets/1-split.json";
-    deserialize_from_string(jsonToString(filename));
+    deserialize_from_string(stringFromJSON(filename));
     REQUIRE(true);
 }
 
 
 TEST_CASE("stub_4","math]"){
     std::cout << "stub_4" << std::endl;
-    const char *filename = "../test/assets/1-reference.json";
-    compareEveryLine(deserialize_from_string(jsonToString(filename)));
+    const char *filename = "../test/assets/1-split.json";
+    compareEveryLine(deserialize_from_string(stringFromJSON(filename)));
     REQUIRE(true);
 }
 
-TEST_CASE("stub_5","math + both files]"){
-    std::cout << "stub_5" << std::endl;
-    const char *filename = "../test/assets/1-reference.json";
-    compareEveryLine(deserialize_from_string(jsonToString(filename)));
+TEST_CASE("stub_5","python_message"){
+    Py_Initialize();
+
+    PyRun_SimpleString("print('Hello World from Embedded Python!!!')");
+    
+    Py_Finalize();
     REQUIRE(true);
 }
+
+TEST_CASE("stub_6","python_file"){
+    const char *filename = "../test/assets/test.py";
+    runFromPyton(filename);
+    REQUIRE(true);
+}
+
+
+TEST_CASE("stub_7","python_gui"){
+    const char *filename = "../test/assets/gui.py";
+    runFromPyton(filename);
+    REQUIRE(true);
+}
+

@@ -187,32 +187,32 @@ source/deserialize.cpp.s:
 	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/deserialize.cpp.s
 .PHONY : source/deserialize.cpp.s
 
-source/fromjson.o: source/fromjson.cpp.o
+source/fromFile.o: source/fromFile.cpp.o
 
-.PHONY : source/fromjson.o
+.PHONY : source/fromFile.o
 
 # target to build an object file
-source/fromjson.cpp.o:
-	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/fromjson.cpp.o
-.PHONY : source/fromjson.cpp.o
+source/fromFile.cpp.o:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/fromFile.cpp.o
+.PHONY : source/fromFile.cpp.o
 
-source/fromjson.i: source/fromjson.cpp.i
+source/fromFile.i: source/fromFile.cpp.i
 
-.PHONY : source/fromjson.i
+.PHONY : source/fromFile.i
 
 # target to preprocess a source file
-source/fromjson.cpp.i:
-	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/fromjson.cpp.i
-.PHONY : source/fromjson.cpp.i
+source/fromFile.cpp.i:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/fromFile.cpp.i
+.PHONY : source/fromFile.cpp.i
 
-source/fromjson.s: source/fromjson.cpp.s
+source/fromFile.s: source/fromFile.cpp.s
 
-.PHONY : source/fromjson.s
+.PHONY : source/fromFile.s
 
 # target to generate assembly for a file
-source/fromjson.cpp.s:
-	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/fromjson.cpp.s
-.PHONY : source/fromjson.cpp.s
+source/fromFile.cpp.s:
+	$(MAKE) -f CMakeFiles/take_home_test_library.dir/build.make CMakeFiles/take_home_test_library.dir/source/fromFile.cpp.s
+.PHONY : source/fromFile.cpp.s
 
 source/linesegment.o: source/linesegment.cpp.o
 
@@ -337,9 +337,9 @@ help:
 	@echo "... source/deserialize.o"
 	@echo "... source/deserialize.i"
 	@echo "... source/deserialize.s"
-	@echo "... source/fromjson.o"
-	@echo "... source/fromjson.i"
-	@echo "... source/fromjson.s"
+	@echo "... source/fromFile.o"
+	@echo "... source/fromFile.i"
+	@echo "... source/fromFile.s"
 	@echo "... source/linesegment.o"
 	@echo "... source/linesegment.i"
 	@echo "... source/linesegment.s"

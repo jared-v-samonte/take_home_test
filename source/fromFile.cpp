@@ -1,20 +1,21 @@
 //
 // Created by Jared V. Samonte on 2021-12-23
 //
-#include "fromjson.h"
-
-
+#include <stdio.h>
+#include <curses.h>
+#include <Python.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
+
 
 using namespace rapidjson;
 
-std::string jsonToString(const char* filename)
+std::string stringFromJSON(const char* filename)
 {
   char readBuffer[80000];
 
@@ -35,5 +36,24 @@ std::string jsonToString(const char* filename)
 
   //return solution 
   return jsonString;
+}
+
+void runFromPyton(const char* filename)
+{
+	FILE* filepointer;
+  //const char* open = "exec(open(\"";
+  //const char* read = "\").read())";
+  //char *execute_code = new char[strlen(open)+strlen("filename")+strlen(read)+1];
+  //strcpy(execute_code,open);
+  //strcat(execute_code,filename);
+  //strcat(execute_code,read);
+
+
+	Py_Initialize();
+
+	filepointer = _Py_fopen(filename, "r");
+	PyRun_SimpleFile(filepointer, filename);
+  //PyRun_SimpleString(execute_code);
+	Py_Finalize();
 }
 

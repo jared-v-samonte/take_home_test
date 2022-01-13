@@ -6,14 +6,21 @@ Build:
 * Ubuntu 20.04 Linux
 * cmake
 
+Directory:
+cd /mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/build
+
 Display:
 * Xming
 * Xlaunch 
 * VcXsrv
 sudo apt install x11-apps
 sudo apt install x11-xserver-utils
+
+Export Set-Up:
+cd /mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/build
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export LIBGL_ALWAYS_INDIRECT=0
+export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
 
 Set-Up:
 sudo apt-get update && sudo apt-get install build-essential
@@ -23,12 +30,77 @@ mkdir build && cd build
 cmake ..
 make
 
+unset PYTHONPATH
+unset PYTHONHOME
+
+
+/mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/test
+../test/current_dirt.py
 
 export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
 sudo ln -s libboost_python38.so libboost_python.so
 
 
-lboost_python3.dylib -> lboost_python38.dylib
-libboost_python.so -> libboost_python38.so
-libboost_python3.dylib -> libboost_python38.dylib
-libboost_python3.so -> libboost_python-py38.so
+void temp()
+{
+	Py_Initialize();
+  CPyObject sys_path, module_name, module, dict, python_class, object, value;
+
+  PyRun_SimpleString("import sys");
+  PyRun_SimpleString("sys.path.append(\"../test/assets\")");
+
+  module_name = PyUnicode_FromString("functions"); 
+  module = PyImport_Import(module_name);
+  if (module == nullptr) 
+  {
+    PyErr_Print();
+    std::cerr << "Fails to import module" << "\n";
+  }
+  else
+  {
+    std::cout << "Imported module " << "\n";
+  }
+  
+
+  // dict is a borrowed reference.
+  dict = PyModule_GetDict(module.getObject());
+  if (dict == nullptr) 
+  {
+    PyErr_Print();
+    std::cerr << "Fails to get the dictionary.\n";
+  }
+  else
+  {
+    std::cout << "Imported the Dict" << std::endl;
+  }
+
+  // Builds the name of a callable class
+  python_class = PyDict_GetItemString(dict, "Testing");
+  if (python_class == nullptr) 
+  {
+    PyErr_Print();
+    std::cerr << "Fails to get the class.\n";
+  }
+  else
+  {
+    std::cout << "Imported the class" << std::endl;
+  }
+
+  // Creates an instance of the class
+  if (PyCallable_Check(python_class.getObject())) 
+  {
+    object = PyObject_CallObject(python_class, nullptr);
+    if (object == nullptr) 
+    {
+      PyErr_Print();
+      std::cerr << "Fails to get the object.\n";
+    }
+    else
+    {
+      std::cout << "Imported the object" << std::endl;
+    }
+    value = PyObject_CallMethod(object, "display", NULL);
+
+  } 
+	Py_Finalize();
+}

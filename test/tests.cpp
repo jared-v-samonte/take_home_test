@@ -50,6 +50,7 @@ TEST_CASE("stub_4","math]"){
 }
 
 TEST_CASE("stub_5","python_message"){
+    std::cout << "stub_5" << std::endl;
     Py_Initialize();
 
     PyRun_SimpleString("print('Hello World from Embedded Python!!!')");
@@ -58,16 +59,22 @@ TEST_CASE("stub_5","python_message"){
     REQUIRE(true);
 }
 
-TEST_CASE("stub_6","python_file"){
-    const char *filename = "../test/assets/test.py";
+TEST_CASE("stub_6","current directory"){
+    std::cout << "stub_6" << std::endl;
+    const char *filename = "../test/current_dirt.py";
+    Py_Initialize();
     runFromPyton(filename);
+    Py_Finalize();
     REQUIRE(true);
 }
 
-
-TEST_CASE("stub_7","python_gui"){
-    const char *filename = "../test/assets/gui.py";
-    runFromPyton(filename);
+TEST_CASE("stub_7","values from CPP to Python and back"){
+    Py_Initialize();
+    std::cout << "stub_7" << std::endl;
+    const char *filename_list = "../test/assets/1-split.json";
+    std::forward_list<Linesegment> list = deserialize_from_string(stringFromJSON(filename_list));
+    function_from_python(list);
+    Py_Finalize();
     REQUIRE(true);
 }
 

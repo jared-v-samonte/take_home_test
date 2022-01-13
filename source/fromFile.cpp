@@ -3,14 +3,17 @@
 //
 #include <stdio.h>
 #include <curses.h>
-#include <Python.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include <iostream>
+#include <Python.h>
+#include <cmath>
+#include "linesegment.h"
+//#include <pyhelper.hpp>
+
 
 
 using namespace rapidjson;
@@ -41,19 +44,166 @@ std::string stringFromJSON(const char* filename)
 void runFromPyton(const char* filename)
 {
 	FILE* filepointer;
-  //const char* open = "exec(open(\"";
-  //const char* read = "\").read())";
-  //char *execute_code = new char[strlen(open)+strlen("filename")+strlen(read)+1];
-  //strcpy(execute_code,open);
-  //strcat(execute_code,filename);
-  //strcat(execute_code,read);
-
-
-	Py_Initialize();
 
 	filepointer = _Py_fopen(filename, "r");
 	PyRun_SimpleFile(filepointer, filename);
-  //PyRun_SimpleString(execute_code);
-	Py_Finalize();
+  std::cout << filename << std::endl;
 }
 
+static PyObject *get_python_class()
+{
+  PyObject *module_name, *module, *dict, *python_class, *object;
+  PyRun_SimpleString("import sys");
+  PyRun_SimpleString("sys.path.append(\"../test/assets\")");
+
+  module_name = PyUnicode_FromString("functions"); 
+  module = PyImport_Import(module_name);
+  
+  // dict is a borrowed reference.
+  dict = PyModule_GetDict(module);
+
+  // Builds the name of a callable class
+  python_class = PyDict_GetItemString(dict, "List");
+
+  object = PyObject_CallObject(python_class, nullptr);
+
+  return object;
+}
+
+void add_linesegment_fromPython(Linesegment line)
+{
+  PyObject *module_name, *module, *dict, *python_class, *object, *add_linesegment, *value, *value_1, *value_2, *value_3, *value_4;
+
+  value_1 = PyFloat_FromDouble(line.getStartPoint().point_x);
+  value_2 = PyFloat_FromDouble(line.getStartPoint().point_y);
+  value_3 = PyFloat_FromDouble(line.getEndPoint().point_x);
+  value_4 = PyFloat_FromDouble(line.getEndPoint().point_y);
+
+  PyRun_SimpleString("import sys");
+  PyRun_SimpleString("sys.path.append(\"../test/assets\")");
+
+  module_name = PyUnicode_FromString("functions"); 
+  module = PyImport_Import(module_name);
+  
+  // dict is a borrowed reference.
+  dict = PyModule_GetDict(module);
+
+  // Builds the name of a callable class
+  python_class = PyDict_GetItemString(dict, "List");
+
+
+  // Creates an instance of the class
+  object = PyObject_CallObject(python_class, nullptr);
+  add_linesegment = PyUnicode_FromString("add_linesegment");
+
+
+  //executr method
+  PyObject_CallMethodObjArgs(object, add_linesegment, value_1, value_2, value_3, value_4, NULL);
+}
+
+void print_list_fromPython()
+{
+  PyObject *module_name, *module, *dict, *python_class, *object, *print_link_list;
+
+
+  PyRun_SimpleString("import sys");
+  PyRun_SimpleString("sys.path.append(\"../test/assets\")");
+
+  module_name = PyUnicode_FromString("functions"); 
+  module = PyImport_Import(module_name);
+  
+
+  // dict is a borrowed reference.
+  dict = PyModule_GetDict(module);
+
+  // Builds the name of a callable class
+  python_class = PyObject_CallObject(python_class, nullptr);//get_python_class();
+
+  // Creates an instance of the class
+  object = PyObject_CallObject(python_class, nullptr);
+
+  print_link_list = PyUnicode_FromString("print_link_list");
+
+  PyObject_CallMethodObjArgs(object, print_link_list, NULL);
+}
+
+void print_value_fromPython(double input, double input2)
+{
+  PyObject *module_name, *module, *dict, *python_class, *object,* method, *value_1, *value_2, *value;
+
+  
+  PyRun_SimpleString("import sys");
+  PyRun_SimpleString("sys.path.append(\"../test/assets\")");
+
+  
+
+  module_name = PyUnicode_FromString("functions"); 
+  module = PyImport_Import(module_name);
+  
+
+  // dict is a borrowed reference.
+  dict = PyModule_GetDict(module);
+  
+  // Builds the name of a callable class
+  python_class = PyDict_GetItemString(dict, "Testing");
+
+  // Creates an instance of the class
+  object = PyObject_CallObject(python_class, nullptr);//get_python_class();
+
+
+  method = PyUnicode_FromString("print_double");
+
+  value_1 = PyFloat_FromDouble(input);
+  value_2 = PyFloat_FromDouble(input2);
+
+  //executr method 
+  PyObject_CallMethodObjArgs(object, method, value_1, value_2, NULL);
+
+
+}
+
+void display_fromPython()
+{
+  PyObject *module_name, *module, *dict, *python_class, *object, *method, *value;
+  
+
+  PyRun_SimpleString("import sys");
+  PyRun_SimpleString("sys.path.append(\"../test/assets\")");
+
+  module_name = PyUnicode_FromString("functions"); 
+  module = PyImport_Import(module_name);
+  
+
+  // dict is a borrowed reference.
+  dict = PyModule_GetDict(module);
+  
+  // Builds the name of a callable class
+  python_class = PyDict_GetItemString(dict, "Testing");//get_python_class();
+  
+  // Creates an instance of the class
+  object = PyObject_CallObject(python_class, nullptr);//get_python_class();
+
+  method = PyUnicode_FromString("display");
+
+  //executr method
+  value = PyObject_CallMethodObjArgs(object, method, NULL);
+
+}
+
+void class_list_transfer(std::forward_list<Linesegment> list)
+{
+  //PyObject* python_instance = PyBytes_FromString(python_class, NULL, NULL);
+  std::forward_list<Linesegment>::iterator iterator_erase = list.before_begin();
+  for (std::forward_list<Linesegment>::iterator iterator_i = list.begin(); iterator_i != list.end(); ++iterator_i)
+  {
+    Linesegment temp = *iterator_i;
+    add_linesegment_fromPython(temp);
+  }
+}
+
+void function_from_python(std::forward_list<Linesegment> list)
+{
+
+  print_value_fromPython(20.2, 4.44);
+  display_fromPython();
+}

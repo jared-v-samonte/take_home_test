@@ -68,9 +68,22 @@ TEST_CASE("stub_6","current directory"){
     REQUIRE(true);
 }
 
-TEST_CASE("stub_7","values from CPP to Python and back"){
-    Py_Initialize();
+/*
+TEST_CASE("stub_7","test graphs"){
     std::cout << "stub_7" << std::endl;
+    const char *filename = "../test/assets/graph.py";
+    Py_Initialize();
+    runFromPyton(filename);
+    Py_Finalize();
+    REQUIRE(true);
+}
+*/
+
+
+
+TEST_CASE("stub_8","values from CPP to Python and back"){
+    Py_Initialize();
+    std::cout << "stub_8" << std::endl;
     const char *filename_list = "../test/assets/1-split.json";
     std::forward_list<Linesegment> list = deserialize_from_string(stringFromJSON(filename_list));
     function_from_python(list);

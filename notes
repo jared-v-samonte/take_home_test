@@ -104,3 +104,16 @@ void temp()
   } 
 	Py_Finalize();
 }
+
+        # Create the maptlotlib FigureCanvas object,
+        # which defines a single set of axes as self.axes.
+        sc = MplCanvas(self, width=5, height=4, dpi=100)
+        lines_collection = collections.LineCollection(linked_list, colors= uniqueish_color(), linewidths=2)
+        sc.axes = pyplot.subplots()
+        sc.axes.add_collection(lines_collection)
+        sc.axes.autoscale_view()
+        self.setCentralWidget(sc)
+        self.show()
+
+    def uniqueish_color(self):
+        return pyplot.cm.gist_ncar(np.random.random())

@@ -97,12 +97,12 @@ void print_list_fromPython(PyObject* object)
 
 void display_fromPython(PyObject* object)
 {
-  PyObject *method, *value;
+  PyObject *method;
 
   method = PyUnicode_FromString("display");
 
   //executr method
-  value = PyObject_CallMethodObjArgs(object, method, NULL);
+  PyObject_CallMethodObjArgs(object, method, NULL);
 }
 
 void class_list_transfer(std::forward_list<Linesegment> list, PyObject* object)
@@ -120,6 +120,6 @@ void function_from_python(std::forward_list<Linesegment> list)
 {
   PyObject *object = get_python_class();
   class_list_transfer(list, object);
-  print_list_fromPython(object);
+  //print_list_fromPython(object);
   display_fromPython(object);
 }

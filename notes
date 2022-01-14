@@ -41,79 +41,30 @@ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
 sudo ln -s libboost_python38.so libboost_python.so
 
 
-void temp()
-{
-	Py_Initialize();
-  CPyObject sys_path, module_name, module, dict, python_class, object, value;
+class MplCanvas(FigureCanvasQTAgg):
 
-  PyRun_SimpleString("import sys");
-  PyRun_SimpleString("sys.path.append(\"../test/assets\")");
+    def __init__(self, parent=None, width=5, height=4, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = fig.add_subplot(111)
+        super(MplCanvas, self).__init__(fig)
 
-  module_name = PyUnicode_FromString("functions"); 
-  module = PyImport_Import(module_name);
-  if (module == nullptr) 
-  {
-    PyErr_Print();
-    std::cerr << "Fails to import module" << "\n";
-  }
-  else
-  {
-    std::cout << "Imported module " << "\n";
-  }
-  
 
-  // dict is a borrowed reference.
-  dict = PyModule_GetDict(module.getObject());
-  if (dict == nullptr) 
-  {
-    PyErr_Print();
-    std::cerr << "Fails to get the dictionary.\n";
-  }
-  else
-  {
-    std::cout << "Imported the Dict" << std::endl;
-  }
 
-  // Builds the name of a callable class
-  python_class = PyDict_GetItemString(dict, "Testing");
-  if (python_class == nullptr) 
-  {
-    PyErr_Print();
-    std::cerr << "Fails to get the class.\n";
-  }
-  else
-  {
-    std::cout << "Imported the class" << std::endl;
-  }
+class MainWindow(QtWidgets.QMainWindow):
 
-  // Creates an instance of the class
-  if (PyCallable_Check(python_class.getObject())) 
-  {
-    object = PyObject_CallObject(python_class, nullptr);
-    if (object == nullptr) 
-    {
-      PyErr_Print();
-      std::cerr << "Fails to get the object.\n";
-    }
-    else
-    {
-      std::cout << "Imported the object" << std::endl;
-    }
-    value = PyObject_CallMethod(object, "display", NULL);
-
-  } 
-	Py_Finalize();
-}
-
+    def __init__(self, segement_list, *args, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
         # Create the maptlotlib FigureCanvas object,
         # which defines a single set of axes as self.axes.
         sc = MplCanvas(self, width=5, height=4, dpi=100)
-        lines_collection = collections.LineCollection(linked_list, colors= uniqueish_color(), linewidths=2)
-        sc.axes = pyplot.subplots()
-        sc.axes.add_collection(lines_collection)
-        sc.axes.autoscale_view()
+        #sc.axes.plot([0,1,2,3,4], [10,1,20,3,40]
+        for counter in list(segement_list):
+            point_x = counter[0]
+            point_y = counter[1]
+            print("(" + str(point_x) + "," + str(point_y) + ")")
+            sc.axes.plot(point_x, point_y, 'bo', linestyle="--")
+        sc = pl.subplots()
+        sc.autoscale()
+        sc.margins(0.1)
         self.setCentralWidget(sc)
         self.show()
-
-    def uniqueish_color(self):
-        return pyplot.cm.gist_ncar(np.random.random())

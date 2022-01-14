@@ -2,12 +2,14 @@ import sys
 import matplotlib
 matplotlib.use('Qt5Agg')
 
+import collections
+
 from PyQt5 import QtCore, QtWidgets
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
+from matplotlib import colors as mcolors
 
-import numpy as np
 import pylab as pl
 from matplotlib import collections  as mc
 import matplotlib.pyplot
@@ -18,10 +20,14 @@ class MplCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
-        lines = [[(0, 1), (1, 1)], [(2, 3), (3, 3)], [(1, 2), (1, 3)]]
-        c = np.array([(1, 0, 0, 1), (0, 1, 0, 1), (0, 0, 1, 1)])
+        segement_list= collections.deque()
+        segement_list.append([(0, 1), (1, 1)])
+        segement_list.append([(2, 6), (6, 2)])
+        segement_list.append([(8, 8), (9, 7)])
+        colors = [mcolors.to_rgba(c)
+          for c in matplotlib.pyplot.rcParams['axes.prop_cycle'].by_key()['color']]
 
-        lc = mc.LineCollection(lines, colors=matplotlib.pyplot.cm.gist_ncar(np.random.random()), linewidths=2)
+        lc = mc.LineCollection(list(segement_list), colors=colors, linewidths=2)
         fig, ax = pl.subplots()
         ax.add_collection(lc)
         ax.autoscale()

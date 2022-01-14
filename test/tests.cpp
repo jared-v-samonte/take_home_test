@@ -80,7 +80,6 @@ TEST_CASE("stub_7","test graphs"){
 */
 
 
-
 TEST_CASE("stub_8","values from CPP to Python and back"){
     Py_Initialize();
     std::cout << "stub_8" << std::endl;

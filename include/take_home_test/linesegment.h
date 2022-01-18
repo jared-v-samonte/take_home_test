@@ -26,6 +26,7 @@ class Linesegment
     point getEndPoint();
     Linesegment();
     Linesegment(double start_x, double start_y, double end_x, double end_y);
+    bool isPointSame(double point_1, double point_2);
     bool isSegmentSame(Linesegment segment);
     void print();
 

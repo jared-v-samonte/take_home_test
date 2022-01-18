@@ -13,8 +13,6 @@
 #include "linesegment.h"
 
 std::string stringFromJSON(const char* filename);
-void runFromPyton(const char* filename);
-void lines_from_list(const char* filename);
-void function_from_python(std::forward_list<Linesegment> list);
+void functionsFromPython(std::forward_list<Linesegment> before_list, std::forward_list<Linesegment> after_list);
 
 #endif //TAKE_HOME_TEST_FROMFILE_H

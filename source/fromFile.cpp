@@ -70,56 +70,99 @@ extern "C" PyObject *get_python_class()
   return object;
 }
 
-void add_linesegment_fromPython(Linesegment line, PyObject* object)
+PyObject * get_line_values(Linesegment line, PyObject* object)
 {
-  PyObject *add_linesegment, *value, *value_1, *value_2, *value_3, *value_4;
+  PyObject *values;
+  double value_1, value_2, value_3, value_4; 
+  int dimensions = 1;
 
+  value_1 = line.getStartPoint().point_x;
+  value_2 = line.getStartPoint().point_y;
+  value_3 = line.getEndPoint().point_x;
+  value_4 = line.getEndPoint().point_y;
+
+  double line_points[] = {value_1, value_2, value_3, value_2};
+
+  //values = PyArray_SimpleNew(dimensions, line_points, NPY_DOUBLE);
+  return values;
+}
+
+void old_append_linesegment(Linesegment line, PyObject* object)
+{
+  PyObject *add_linesegment, *value_1, *value_2, *value_3, *value_4, values;
+
+  // gets line values and turns them into PyObjects
+  value_1 = PyFloat_FromDouble(line.getStartPoint().point_x);
+  value_2 = PyFloat_FromDouble(line.getStartPoint().point_y);
+  value_3 = PyFloat_FromDouble(line.getEndPoint().point_x);
+  value_4 = PyFloat_FromDouble(line.getEndPoint().point_y);
+  //values = get_line_values(line, object);
+
+  // gets the method name
+  add_linesegment = PyUnicode_FromString("addLineToOriginal");
+
+  //executr method
+  PyObject_CallMethodObjArgs(object, add_linesegment, value_1, value_2, value_3, value_4, NULL);
+}
+
+void new_append_linesegment(Linesegment line, PyObject* object)
+{
+  PyObject *add_linesegment, *value_1, *value_2, *value_3, *value_4;
+
+  // gets line values and turns them into PyObjects
   value_1 = PyFloat_FromDouble(line.getStartPoint().point_x);
   value_2 = PyFloat_FromDouble(line.getStartPoint().point_y);
   value_3 = PyFloat_FromDouble(line.getEndPoint().point_x);
   value_4 = PyFloat_FromDouble(line.getEndPoint().point_y);
 
   // gets the method name
-  add_linesegment = PyUnicode_FromString("add_linesegment");
+  add_linesegment = PyUnicode_FromString("addLineToNew");
 
   //executr method
   PyObject_CallMethodObjArgs(object, add_linesegment, value_1, value_2, value_3, value_4, NULL);
 }
 
-void print_list_fromPython(PyObject* object)
+void printNewList(PyObject* object)
 {
-  PyObject *print_link_list;
-
-  print_link_list = PyUnicode_FromString("print_link_list");
+  PyObject *print_link_list = PyUnicode_FromString("printNewList");
 
   PyObject_CallMethodObjArgs(object, print_link_list, NULL);
 }
 
-void display_fromPython(PyObject* object)
+void printOriginalList(PyObject* object)
 {
-  PyObject *method;
+  PyObject *print_link_list = PyUnicode_FromString("printOriginalList");
 
-  method = PyUnicode_FromString("display");
+  PyObject_CallMethodObjArgs(object, print_link_list, NULL);
+}
 
-  //executr method
+void display_results(PyObject* object)
+{
+  PyObject * method = PyUnicode_FromString("display");
+
   PyObject_CallMethodObjArgs(object, method, NULL);
 }
 
-void class_list_transfer(std::forward_list<Linesegment> list, PyObject* object)
+void oldListTransfer(std::forward_list<Linesegment> list, PyObject* object)
 {
-  //PyObject* python_instance = PyBytes_FromString(python_class, NULL, NULL);
-  std::forward_list<Linesegment>::iterator iterator_erase = list.before_begin();
   for (std::forward_list<Linesegment>::iterator iterator_i = list.begin(); iterator_i != list.end(); ++iterator_i)
   {
-    Linesegment temp = *iterator_i;
-    add_linesegment_fromPython(temp, object);
+    old_append_linesegment(*iterator_i, object);
   }
 }
 
-void function_from_python(std::forward_list<Linesegment> list)
+void newListTransfer(std::forward_list<Linesegment> list, PyObject* object)
+{
+  for (std::forward_list<Linesegment>::iterator iterator_i = list.begin(); iterator_i != list.end(); ++iterator_i)
+  {
+    new_append_linesegment(*iterator_i, object);
+  }
+}
+
+void functionsFromPython(std::forward_list<Linesegment> old_list, std::forward_list<Linesegment> new_list)
 {
   PyObject *object = get_python_class();
-  class_list_transfer(list, object);
-  //print_list_fromPython(object);
-  display_fromPython(object);
+  oldListTransfer(old_list, object);
+  newListTransfer(new_list, object);
+  display_results(object);
 }

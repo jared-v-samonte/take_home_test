@@ -33,38 +33,43 @@ make
 unset PYTHONPATH
 unset PYTHONHOME
 
+/*
 
-/mnt/c/Users/JAVSamonte/Documents/Github/take_home_test/test
-../test/current_dirt.py
+    def get_points_x02_pattern(self, line):
+        first_x = line[0][0]
+        first_y = line[0][1]
+        second_x = line[1][0]
+        second_y = line[1][1]
+        return (first_x, first_y, second_x, second_y)
 
-export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
-sudo ln -s libboost_python38.so libboost_python.so
+    def get_slope(self, line):
+        points_xy_pattern = self.get_points_x02_pattern(line)
+        x_difference = points_xy_pattern[0] - points_xy_pattern[2]
+        y_difference = points_xy_pattern[1] - points_xy_pattern[3]
+        return y_difference / x_difference
 
+    def has_same_slope(self, line_1, line_2):
+        return self.get_slope(line_1) == self.get_slope(line_2)
 
-class MplCanvas(FigureCanvasQTAgg):
+    def identical_lines(self, line_a, line_b):
+        points_xy_pattern_a = self.get_points_x02_pattern(line_a)
+        points_xy_pattern_b = self.get_points_x02_pattern(line_b)
+        return points_xy_pattern_a == points_xy_pattern_b
 
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
-        fig = Figure(figsize=(width, height), dpi=dpi)
-        self.axes = fig.add_subplot(111)
-        super(MplCanvas, self).__init__(fig)
+    def merge_2_lines(self, line_a, line_b):
+        points_xy_pattern_a = self.get_points_x02_pattern(line_a)
+        points_xy_pattern_b = self.get_points_x02_pattern(line_b)
 
+    def append_to_new_list(self, line):
+        points_xy_pattern = self.get_points_x02_pattern(line)
+        self.new_list.append([(points_xy_pattern[0], points_xy_pattern[1]), (points_xy_pattern[2], points_xy_pattern[3])])
 
+    def merge_lines(self):
+        for line_i in self.new_list:
+            for line_j in self.new_list:
+                if (self.has_same_slope(line_i,line_j)):
+                    #print(str(line_i) + " and " + str(line_j) + "will be added")
+                    self.new_list.append(line_i)
+                    self.new_list.append(line_j)
+*/
 
-class MainWindow(QtWidgets.QMainWindow):
-
-    def __init__(self, segement_list, *args, **kwargs):
-        super(MainWindow, self).__init__(*args, **kwargs)
-        # Create the maptlotlib FigureCanvas object,
-        # which defines a single set of axes as self.axes.
-        sc = MplCanvas(self, width=5, height=4, dpi=100)
-        #sc.axes.plot([0,1,2,3,4], [10,1,20,3,40]
-        for counter in list(segement_list):
-            point_x = counter[0]
-            point_y = counter[1]
-            print("(" + str(point_x) + "," + str(point_y) + ")")
-            sc.axes.plot(point_x, point_y, 'bo', linestyle="--")
-        sc = pl.subplots()
-        sc.autoscale()
-        sc.margins(0.1)
-        self.setCentralWidget(sc)
-        self.show()

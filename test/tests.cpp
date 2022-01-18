@@ -59,33 +59,15 @@ TEST_CASE("stub_5","python_message"){
     REQUIRE(true);
 }
 
-TEST_CASE("stub_6","current directory"){
-    std::cout << "stub_6" << std::endl;
-    const char *filename = "../test/current_dirt.py";
-    Py_Initialize();
-    runFromPyton(filename);
-    Py_Finalize();
-    REQUIRE(true);
-}
 
-/*
-TEST_CASE("stub_7","test graphs"){
-    std::cout << "stub_7" << std::endl;
-    const char *filename = "../test/assets/graph.py";
+TEST_CASE("stub_6","values from CPP to Python and back"){
     Py_Initialize();
-    runFromPyton(filename);
-    Py_Finalize();
-    REQUIRE(true);
-}
-*/
-
-
-TEST_CASE("stub_8","values from CPP to Python and back"){
-    Py_Initialize();
-    std::cout << "stub_8" << std::endl;
-    const char *filename_list = "../test/assets/1-split.json";
-    std::forward_list<Linesegment> list = deserialize_from_string(stringFromJSON(filename_list));
-    function_from_python(list);
+    std::cout << "stub_5" << std::endl;
+    const char *reference = "../test/assets/1-reference.json"; //1-reference.json";
+    const char *filename = "../test/assets/1-split.json"; //1-reference.json";
+    std::forward_list<Linesegment> old_list = deserialize_from_string(stringFromJSON(reference));
+    std::forward_list<Linesegment> merged_list = compareEveryLine(deserialize_from_string(stringFromJSON(filename)));
+    functionsFromPython(old_list, merged_list);
     Py_Finalize();
     REQUIRE(true);
 }

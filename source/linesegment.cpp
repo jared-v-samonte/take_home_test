@@ -45,15 +45,25 @@ Linesegment::point Linesegment::getEndPoint()
     return end_point;
 }
 
+bool Linesegment::isPointSame(double point_1, double point_2)
+{
+    return (point_1 == point_2);
+}
+
 // Compare Function
 bool Linesegment::isSegmentSame(Linesegment segment)
 {
-    bool solution = true;
-    if (start_point.point_x != segment.getStartPoint().point_x) {solution = false;}
-    if (start_point.point_y != segment.getStartPoint().point_y) {solution = false;}
-    if (end_point.point_x != segment.getEndPoint().point_x) {solution = false;}
-    if (end_point.point_y != segment.getEndPoint().point_y) {solution = false;}
-    return solution;
+
+    return ((
+    (Linesegment::isPointSame(start_point.point_x, segment.getStartPoint().point_x)) && 
+    (Linesegment::isPointSame(start_point.point_y, segment.getStartPoint().point_y)) &&
+    (Linesegment::isPointSame(end_point.point_x, segment.getEndPoint().point_x)) &&
+    (Linesegment::isPointSame(end_point.point_y, segment.getEndPoint().point_y)))
+    ||
+    ((Linesegment::isPointSame(end_point.point_x, segment.getStartPoint().point_x)) && 
+    (Linesegment::isPointSame(end_point.point_y, segment.getStartPoint().point_y)) &&
+    (Linesegment::isPointSame(start_point.point_x, segment.getEndPoint().point_x)) &&
+    (Linesegment::isPointSame(start_point.point_y, segment.getEndPoint().point_y))));
 }
 
 // Print Function

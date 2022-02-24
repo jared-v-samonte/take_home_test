@@ -1,5 +1,5 @@
 //
-// Created by Nikolay Shulga on 2019-06-18.
+// Created by the professor on 2019-06-18.
 //
 // Stub code to test the framework. Feel free to ignore or change.
 //

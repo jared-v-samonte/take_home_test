@@ -1,5 +1,5 @@
 //
-// Created by Nikolay Shulga on 2019-06-18.
+// Created by the professor on 2019-06-18.
 //
 
 #define CATCH_CONFIG_MAIN
@@ -65,6 +65,7 @@ TEST_CASE("stub_6","values from CPP to Python and back"){
     std::cout << "stub_5" << std::endl;
     const char *reference = "../test/assets/1-reference.json"; //1-reference.json";
     const char *filename = "../test/assets/1-split.json"; //1-reference.json";
+    std::cout << "here" << std::endl;
     std::forward_list<Linesegment> old_list = deserialize_from_string(stringFromJSON(reference));
     std::forward_list<Linesegment> merged_list = compareEveryLine(deserialize_from_string(stringFromJSON(filename)));
     functionsFromPython(old_list, merged_list);

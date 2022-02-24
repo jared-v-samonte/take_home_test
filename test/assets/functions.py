@@ -3,8 +3,7 @@ import matplotlib
 import collections
 matplotlib.use('Qt5Agg')
 
-#from PyQt5 import QtCore, QtWidgets
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtWidgets
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 

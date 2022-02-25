@@ -17,27 +17,18 @@ There are two tasks:
   ```
 
 # Prerquesites
-*Build:
-* * WSL 2 (Windows Subsystem Linux) 
-* * Xming
-* * Xlaunch 
-* * VcXsrv
-* Install Prerquesites
-* * sudo apt install x11-apps
-* * sudo apt install x11-xserver-utils
-* * sudo apt-get update && sudo apt-get install build-essential
-* * sudo apt install cmake
-* * sudo apt install g++
-* Diaply Set-Up (must do this for every newly opened teminal):
-* * export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-* * export LIBGL_ALWAYS_INDIRECT=0
-* * export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
-
-Set-Up:
-
-mkdir build && cd build
-cmake ..
-make
-
-unset PYTHONPATH
-unset PYTHONHOME
+### Build:
+* WSL 2 (Windows Subsystem Linux) 
+* Xming
+* Xlaunch 
+* VcXsrv
+### Install Prerquesites
+* sudo apt install x11-apps
+* sudo apt install x11-xserver-utils
+* sudo apt-get update && sudo apt-get install build-essential
+* sudo apt install cmake
+* sudo apt install g++
+### Diaply Set-Up (must do this for every newly opened teminal):
+* export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+* export LIBGL_ALWAYS_INDIRECT=0
+* export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"

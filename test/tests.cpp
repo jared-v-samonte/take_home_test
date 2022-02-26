@@ -1,5 +1,5 @@
 //
-// Created by the professor on 2019-06-18.
+// Created by nikolay shulga on 2019-06-18.
 //
 
 #define CATCH_CONFIG_MAIN

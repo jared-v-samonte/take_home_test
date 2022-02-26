@@ -15,6 +15,10 @@ There are two tasks:
   $ cmake ..
   $ make
   ```
+## How to run in Windows Subsystem for Linux
+* Go to build folder
+* ./take_home_test for running main file
+* ./unit_ test to run tests
 
 # Prerquesites
 ### Build:
@@ -32,7 +36,4 @@ There are two tasks:
 * export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 * export LIBGL_ALWAYS_INDIRECT=0
 * export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
-### How to run in Windows Subsystem for Linux
-* Go to build folder
-* ./take_home_test for running main file
-* ./unit_ test to run tests
+

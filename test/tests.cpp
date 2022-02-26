@@ -27,7 +27,7 @@ TEST_CASE("tests  deserialize_from_string","[deserialize_lines]"){
 }
 
 
-TEST_CASE("stub_2","[readfile]"){
+TEST_CASE("tests is string get be extracted from json","[readfile]"){
     std::cout << "stub_2" << std::endl;
     const char *filename = "../test/assets/1-split.json";
     std::cout << stringFromJSON(filename);

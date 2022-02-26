@@ -31,6 +31,7 @@ std::forward_list<Linesegment> deserialize(Document& doc)
     if (lines_json.IsArray()){
         auto lines_array = lines_json.GetArray();
         for (auto& line : lines_array) {
+            //intializes new segment
             Linesegment new_segment;
             auto const& id_json = line["id"];
             auto const& start_json = line["start"];
@@ -40,11 +41,13 @@ std::forward_list<Linesegment> deserialize(Document& doc)
                     start_y = start_json.GetArray()[1].GetDouble(),
                     end_x = end_json.GetArray()[0].GetDouble(),
                     end_y = end_json.GetArray()[1].GetDouble();
+                //adds points to segments
                 new_segment.setStartX(start_x);
                 new_segment.setStartY(start_y);
                 new_segment.setEndX(end_x);
                 new_segment.setEndY(end_y);
                 auto id = id_json.GetString();
+                //inserts completed line segment to forward list
                 line_iterator = line_list.insert_after(line_iterator, new_segment);
             }
         }

@@ -14,7 +14,7 @@
 
 
 
-
+// gets slope of a line
 float getSlope(Linesegment line)
 {
     double x_difference = line.getStartPoint().point_x - line.getEndPoint().point_x;
@@ -23,6 +23,7 @@ float getSlope(Linesegment line)
     return (float)solution;
 }
 
+// checks if two lines have the same slope
 bool hasSameSlope(Linesegment line_1, Linesegment line_2)
 {
     return std::abs(getSlope(line_1) - getSlope(line_2)) < std::numeric_limits<float>::epsilon();
@@ -34,6 +35,7 @@ bool isStartMidEnd(double start, double mid, double end)
 }
 
 
+// checks if a a point is on a line
 bool isPointOnSegment(Linesegment line, Linesegment::point point)
 {  
     return ((isStartMidEnd(line.getStartPoint().point_x, point.point_x, line.getEndPoint().point_x)) && 
@@ -41,7 +43,7 @@ bool isPointOnSegment(Linesegment line, Linesegment::point point)
    (isStartMidEnd(line.getStartPoint().point_y, point.point_y, line.getEndPoint().point_y)));
 }
 
-
+// checks if two linces a intercepts
 bool isIntercepting(Linesegment line_1, Linesegment line_2)
 {
     if (isPointOnSegment(line_1, line_2.getStartPoint())) return true;
@@ -53,13 +55,13 @@ bool isIntercepting(Linesegment line_1, Linesegment line_2)
 
 
 
-
+// checks is two lines are parallels and intercepts
 bool isMerging(Linesegment line_1, Linesegment line_2)
 {
     return (hasSameSlope(line_1, line_2) && isIntercepting(line_1, line_2));
 }
 
-
+// not yet used
 double yEndFromLineArray(Linesegment lines[])
 {
     double end;
@@ -69,6 +71,7 @@ double yEndFromLineArray(Linesegment lines[])
     return end;
 }
 
+// not yet used
 double yStartFromLineArray(Linesegment lines[])
 {
     double start;
@@ -78,6 +81,7 @@ double yStartFromLineArray(Linesegment lines[])
     return start;
 }
 
+// gets X point from the end point
 double xEndFromLines(Linesegment line_1, Linesegment line_2)
 {
     double end;
@@ -87,6 +91,7 @@ double xEndFromLines(Linesegment line_1, Linesegment line_2)
     return end;
 }
 
+// gets X point from the start point
 double xStartFromLines(Linesegment line_1, Linesegment line_2)
 {
     double start;
@@ -96,29 +101,30 @@ double xStartFromLines(Linesegment line_1, Linesegment line_2)
     return start;
 }
 
-double yFromXAndLines(double x_value, Linesegment lines[])
+// checks both points form lines to find y point
+double yFromXAndLines(double x_value, Linesegment line[])
 {
     double y_value;
-    if(x_value == lines[0].getStartPoint().point_x)
+    if(x_value == line[0].getStartPoint().point_x)
     {
-        y_value = lines[0].getStartPoint().point_y;
+        y_value = line[0].getStartPoint().point_y;
     }
-    else if(x_value == lines[0].getEndPoint().point_x)
+    else if(x_value == line[0].getEndPoint().point_x)
     {
-        y_value = lines[0].getEndPoint().point_y;
+        y_value = line[0].getEndPoint().point_y;
     }
-    else if(x_value == lines[1].getStartPoint().point_x)
+    else if(x_value == line[1].getStartPoint().point_x)
     {
-        y_value = lines[1].getStartPoint().point_y;
+        y_value = line[1].getStartPoint().point_y;
     }
-    else if(x_value == lines[1].getEndPoint().point_x)
+    else if(x_value == line[1].getEndPoint().point_x)
     {
-        y_value = lines[1].getEndPoint().point_y;
+        y_value = line[1].getEndPoint().point_y;
     }
     return y_value;
 }
 
-
+// merge the two Linesegment objects into one
 Linesegment mergeLines(Linesegment line_1, Linesegment line_2)
 {
     Linesegment new_segment;
@@ -134,6 +140,7 @@ Linesegment mergeLines(Linesegment line_1, Linesegment line_2)
     return new_segment;
 }
 
+// checks if a Linesegment is already in the list
 bool isLineAlreadyinList(Linesegment line, std::forward_list<Linesegment> list)
 {
     bool already_in_list = false;
@@ -147,6 +154,7 @@ bool isLineAlreadyinList(Linesegment line, std::forward_list<Linesegment> list)
     return already_in_list;
 }
 
+// inputs new Linesegment htat are merged into a new forward list
 std::forward_list<Linesegment> compareEveryLine(std::forward_list<Linesegment> list)
 {
     std::forward_list<Linesegment> merged_list;

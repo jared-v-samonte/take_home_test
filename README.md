@@ -12,9 +12,12 @@ There are two tasks:
   cmake ..
   make
   ```
-* Run in Windows Subsystem for Linux:
+* Run main program in Windows Subsystem for Linux:
   ```
-  ./take_home_test for running main file
+  ./take_home_test
+  ```
+* Run main program in Windows Subsystem for Linux:
+  ```
   ./unit_ test to run tests
   ```
 * Go to build folder

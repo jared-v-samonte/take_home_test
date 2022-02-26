@@ -28,7 +28,11 @@ There are two tasks:
 * sudo apt-get update && sudo apt-get install build-essential
 * sudo apt install cmake
 * sudo apt install g++
-### Diaply Set-Up (must do this for every newly opened teminal):
+### Dipaly Set-Up (must do this for every newly opened teminal):
 * export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 * export LIBGL_ALWAYS_INDIRECT=0
 * export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python3.8/"
+### How to run in Windows Subsystem for Linux
+* Go to build folder
+* ./take_home_test for running main file
+* ./unit_ test to run tests

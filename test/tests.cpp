@@ -19,7 +19,7 @@
 
 
 // stub to test the framework. Replace/modify as needed.
-TEST_CASE("stub_1","[deserialize_lines]"){
+TEST_CASE("tests  deserialize_from_string","[deserialize_lines]"){
     std::cout << "stub_1" << std::endl;
     std::string input{"{\"lines\":[{\"id\":\"0-1\",\"start\":[373.44034013711515,-582.9714893905727],\"end\":[562.5097926743379,67.6201009971137]},{\"id\":\"0-2\",\"start\":[-395.24361297250138,-598.0232377709511],\"end\":[373.44034013711515,-582.9714893905727]}]}"};
     deserialize_from_string(input);
@@ -34,7 +34,7 @@ TEST_CASE("stub_2","[readfile]"){
     REQUIRE(true);
 }
 
-TEST_CASE("stub_3","[deserialize_lines + readfile]"){
+TEST_CASE("tests stringFromJSON","[deserialize_lines + readfile]"){
     std::cout << "stub_3" << std::endl;
     const char *filename = "../test/assets/1-split.json";
     deserialize_from_string(stringFromJSON(filename));
@@ -42,14 +42,14 @@ TEST_CASE("stub_3","[deserialize_lines + readfile]"){
 }
 
 
-TEST_CASE("stub_4","math]"){
+TEST_CASE("tests compareEveryLine","math]"){
     std::cout << "stub_4" << std::endl;
     const char *filename = "../test/assets/1-split.json";
     compareEveryLine(deserialize_from_string(stringFromJSON(filename)));
     REQUIRE(true);
 }
 
-TEST_CASE("stub_5","python_message"){
+TEST_CASE("tests PyRun_SimpleString","python_message"){
     std::cout << "stub_5" << std::endl;
     Py_Initialize();
 
@@ -60,7 +60,7 @@ TEST_CASE("stub_5","python_message"){
 }
 
 
-TEST_CASE("stub_6","values from CPP to Python and back"){
+TEST_CASE("tests Py_Objects","values from CPP to Python and back"){
     Py_Initialize();
     std::cout << "stub_5" << std::endl;
     const char *reference = "../test/assets/1-reference.json"; //1-reference.json";
